@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0 //EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.UserMapper">
+<select id="findUser" parameterType="com.user.User" resultType="com.ssm.card.management">
+select * from user where name=#{name} and password=#{password}
+</select>
+<select id="findUser1" parameterType="com.user.User" resultType="com.user.User">
+select * from user where name=#{name} and password=#{password}
+</select>
+<insert id="addUser" parameterType="com.user.User">
+insert into user(name,password,email,phone,idcard,
+mycardUR,mycardSSR,mycardSR,mycardR,mycardN,UR,SSR,SR,R,N)
+value(#{name},#{password},#{email},#{phone},#{idCard},
+0,0,0,0,0,1,5,20,80,94)
+</insert>										 
+<update id="update" parameterType="com.user.User" >
+update user set mycardUR=#{m.myCardUR},mycardSSR=#{m.myCardSSR},mycardSR=#{m.myCardSR},
+mycardR=#{m.myCardR},mycardN=#{m.myCardN},UR=#{m.UR},SSR=#{m.SSR}
+,SR=#{m.SR},R=#{m.R},N=#{m.N}
+where name=#{name} and password=#{password}
+</update>
+<select id="updateselect" parameterType="com.user.User" resultType="com.user.User">
+select * from user where name=#{name} and idcard=#{idCard}
+</select>
+<update id="updatenameandidcard" parameterType="com.user.User">
+update user set password=#{password} where name=#{name} and idcard=#{idCard}
+</update>
+</mapper>
